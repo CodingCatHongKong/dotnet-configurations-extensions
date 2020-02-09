@@ -1,0 +1,7 @@
+{
+    "configA": {
+        "config1": "Config1",
+        "config2": 2,
+        "config3": true
+    }
+}
