@@ -24,43 +24,6 @@ namespace CodingCat.Extensions.Configuration.Test
         }
 
         [TestMethod]
-        public void Test_BuildRegistered_ConfigAJson_Ok()
-        {
-            // Arrange
-            var expected = GetExpected("Config1", 2, true);
-
-            // Act
-            var actual = new ConfigA();
-            this.Builder
-                .RegisterJson(typeof(ConfigA), Environment.Default, false)
-                .Build()
-                .GetSection(nameof(ConfigA))
-                .Bind(actual);
-
-            // Assert
-            AssertConfigA(expected, actual);
-        }
-
-        [TestMethod]
-        public void Test_BuildRegisteredDevelop_ConfigAJson_Ok()
-        {
-            // Arrange
-            var expected = GetExpected("Config1", 3, true);
-
-            // Act
-            var actual = new ConfigA();
-            this.Builder
-                .RegisterJson(typeof(ConfigA), Environment.Default, false)
-                .RegisterJson(typeof(ConfigA), Environment.Develop, false)
-                .Build()
-                .GetSection(nameof(ConfigA))
-                .Bind(actual);
-
-            // Assert
-            AssertConfigA(expected, actual);
-        }
-
-        [TestMethod]
         public void Test_BuildFromSource_ConfigAJson_Ok()
         {
             // Arrange
