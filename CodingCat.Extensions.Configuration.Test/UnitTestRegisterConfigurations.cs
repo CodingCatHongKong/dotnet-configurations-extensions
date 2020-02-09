@@ -1,11 +1,9 @@
-﻿using System;
-using CodingCat.Extensions.Configuration.Enums;
+﻿using CodingCat.Extensions.Configuration.Enums;
 using CodingCat.Extensions.Configuration.ExtensionsConfigurations;
 using CodingCat.Extensions.Configuration.Impls;
 using CodingCat.Extensions.Configuration.Test.Configurations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 using Environment = CodingCat.Extensions.Configuration.Enums.Environment;
 using IConfigurationBuilder = Microsoft.Extensions.Configuration.IConfigurationBuilder;
 
@@ -27,7 +25,7 @@ namespace CodingCat.Extensions.Configuration.Test
         public void Test_BuildFromSource_ConfigAJson_Ok()
         {
             // Arrange
-            var expected = GetExpected("Config1", 3, true);
+            var expected = new ConfigA("Config1", 3, true);
 
             var source = new ConfigurationSource<ConfigA>(
                 Environment.Default,
@@ -45,14 +43,14 @@ namespace CodingCat.Extensions.Configuration.Test
                 .Bind(actual);
 
             // Assert
-            AssertConfigA(expected, actual);
+            expected.AssertWith(actual);
         }
 
         [TestMethod]
         public void Test_BuildFromSources_ConfigAJson_Ok()
         {
             // Arrange
-            var expected = GetExpected("Config1", 3, true);
+            var expected = new ConfigA("Config1", 3, true);
 
             var source = new ConfigurationSource<ConfigA>(
                 Environment.Default,
@@ -72,14 +70,14 @@ namespace CodingCat.Extensions.Configuration.Test
                 .Bind(actual);
 
             // Assert
-            AssertConfigA(expected, actual);
+            expected.AssertWith(actual);
         }
 
         [TestMethod]
         public void Test_BuildFromOptionalSources_ConfigAJson_Ok()
         {
             // Arrange
-            var expected = GetExpected("Config1", 2, true);
+            var expected = new ConfigA("Config1", 2, true);
 
             var source = new ConfigurationSource<ConfigA>(
                 Environment.Default,
@@ -99,14 +97,14 @@ namespace CodingCat.Extensions.Configuration.Test
                 .Bind(actual);
 
             // Assert
-            AssertConfigA(expected, actual);
+            expected.AssertWith(actual);
         }
 
         [TestMethod]
         public void Test_AutoBuild_ConfigAJson_Ok()
         {
             // Arrange
-            var expected = GetExpected("Config1", 3, true);
+            var expected = new ConfigA("Config1", 3, true);
 
             // Act
             var actual = new ConfigA();
@@ -117,30 +115,7 @@ namespace CodingCat.Extensions.Configuration.Test
                 .Bind(actual);
 
             // Assert
-            AssertConfigA(expected, actual);
+            expected.AssertWith(actual);
         }
-
-        public static void AssertConfigA(ConfigA expected, ConfigA actual)
-        {
-            Console.WriteLine(JsonConvert.SerializeObject(
-                actual, Formatting.Indented
-            ));
-
-            Assert.IsNotNull(actual);
-            Assert.AreEqual(expected.Config1, actual.Config1);
-            Assert.AreEqual(expected.Config2, actual.Config2);
-            Assert.AreEqual(expected.Config3, actual.Config3);
-        }
-
-        public static ConfigA GetExpected(
-            string config1,
-            int config2,
-            bool config3
-        ) => new ConfigA()
-        {
-            Config1 = config1,
-            Config2 = config2,
-            Config3 = config3
-        };
     }
 }

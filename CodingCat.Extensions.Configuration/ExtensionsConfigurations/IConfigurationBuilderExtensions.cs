@@ -9,7 +9,7 @@ using System.Text;
 
 namespace CodingCat.Extensions.Configuration.ExtensionsConfigurations
 {
-    public static class IConfigurationBuilder
+    public static class IConfigurationBuilderExtensions
     {
         public static IBuilder SetRelativePath(
             this IBuilder builder,
@@ -45,11 +45,11 @@ namespace CodingCat.Extensions.Configuration.ExtensionsConfigurations
             switch (fileType)
             {
                 case FileType.Json:
-                    return builder.AddJsonFile(path, isOptional);
+                    return builder.AddJsonFile(path, isOptional, true);
                 case FileType.Xml:
-                    return builder.AddXmlFile(path, isOptional);
+                    return builder.AddXmlFile(path, isOptional, true);
                 case FileType.Ini:
-                    return builder.AddIniFile(path, isOptional);
+                    return builder.AddIniFile(path, isOptional, true);
             }
 
             throw new NotSupportedException(fileType.ToString());

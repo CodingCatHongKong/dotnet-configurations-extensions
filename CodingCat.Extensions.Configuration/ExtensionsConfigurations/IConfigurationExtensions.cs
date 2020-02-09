@@ -4,7 +4,7 @@ using IConfig = Microsoft.Extensions.Configuration.IConfiguration;
 
 namespace CodingCat.Extensions.Configuration.ExtensionsConfigurations
 {
-    public static class IConfiguration
+    public static class IConfigurationExtensions
     {
         public static object Bind(this IConfig config, Type type)
         {
