@@ -62,3 +62,8 @@ var services = new ServiceCollection()
   .BuildServiceProvider();
 var systemConfiguration = services.GetRequiredService<IOptionsSnapshot<SystemConfiguration>>();
 ```
+
+#### Target Frameworks
+
+- .Net 4.6.1
+- .Net Standard 2.0
