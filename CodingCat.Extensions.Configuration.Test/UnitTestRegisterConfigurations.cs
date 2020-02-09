@@ -102,6 +102,24 @@ namespace CodingCat.Extensions.Configuration.Test
             AssertConfigA(expected, actual);
         }
 
+        [TestMethod]
+        public void Test_AutoBuild_ConfigAJson_Ok()
+        {
+            // Arrange
+            var expected = GetExpected("Config1", 3, true);
+
+            // Act
+            var actual = new ConfigA();
+            this.Builder
+                .Auto<ConfigA>(FileType.Json)
+                .Build()
+                .GetSection(nameof(ConfigA))
+                .Bind(actual);
+
+            // Assert
+            AssertConfigA(expected, actual);
+        }
+
         public static void AssertConfigA(ConfigA expected, ConfigA actual)
         {
             Console.WriteLine(JsonConvert.SerializeObject(

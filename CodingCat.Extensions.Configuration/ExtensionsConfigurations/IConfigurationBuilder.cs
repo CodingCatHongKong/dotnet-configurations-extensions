@@ -46,6 +46,10 @@ namespace CodingCat.Extensions.Configuration.ExtensionsConfigurations
             {
                 case FileType.Json:
                     return builder.AddJsonFile(path, isOptional);
+                case FileType.Xml:
+                    return builder.AddXmlFile(path, isOptional);
+                case FileType.Ini:
+                    return builder.AddIniFile(path, isOptional);
             }
 
             throw new NotSupportedException(fileType.ToString());
@@ -90,5 +94,44 @@ namespace CodingCat.Extensions.Configuration.ExtensionsConfigurations
             foreach (var source in sources) builder.Register(source);
             return builder;
         }
+
+        public static IBuilder Auto(
+            this IBuilder builder,
+            Type configurationType,
+            string fullPathToFolder,
+            FileType fileType
+        )
+        {
+            foreach (Environment environment in Enum.GetValues(
+                typeof(Environment)
+            ))
+            {
+                builder.Register(
+                    configurationType,
+                    fullPathToFolder,
+                    environment,
+                    fileType,
+                    environment != Environment.Default
+                );
+            }
+            return builder;
+        }
+
+        public static IBuilder Auto(
+            this IBuilder builder,
+            Type configurationType,
+            FileType fileType
+        ) => builder.Auto(configurationType, null, fileType);
+
+        public static IBuilder Auto<T>(
+            this IBuilder builder,
+            string fullPathToFolder,
+            FileType fileType
+        ) => builder.Auto(typeof(T), fullPathToFolder, fileType);
+
+        public static IBuilder Auto<T>(
+            this IBuilder builder,
+            FileType fileType
+        ) => builder.Auto(typeof(T), null, fileType);
     }
 }
