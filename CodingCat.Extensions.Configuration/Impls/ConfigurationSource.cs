@@ -15,6 +15,7 @@ namespace CodingCat.Extensions.Configuration.Impls
         public bool IsOptional { get; private set; }
 
         #region Constructor(s)
+
         public ConfigurationSource(ConfigurationSource source)
         {
             this.ConfigurationsDirectory = source.ConfigurationsDirectory;
@@ -47,7 +48,8 @@ namespace CodingCat.Extensions.Configuration.Impls
         {
             this.ConfigurationsDirectory = directoryInfo;
         }
-        #endregion
+
+        #endregion Constructor(s)
 
         public ConfigurationSource With(DirectoryInfo configurations)
         {
@@ -98,6 +100,7 @@ namespace CodingCat.Extensions.Configuration.Impls
     public class ConfigurationSource<T> : ConfigurationSource
     {
         #region Constructor(s)
+
         public ConfigurationSource(
             Environment environment,
             FileType fileType,
@@ -115,7 +118,9 @@ namespace CodingCat.Extensions.Configuration.Impls
             environment,
             fileType,
             isOptional
-        ) { }
-        #endregion
+        )
+        { }
+
+        #endregion Constructor(s)
     }
 }

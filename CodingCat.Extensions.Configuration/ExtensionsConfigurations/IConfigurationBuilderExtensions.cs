@@ -1,11 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using CodingCat.Extensions.Configuration.Enums;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
+using System.Text;
+using Environment = CodingCat.Extensions.Configuration.Enums.Environment;
 using IBuilder = Microsoft.Extensions.Configuration.IConfigurationBuilder;
 using IConfigurationSource = CodingCat.Extensions.Configuration.Interfaces.IConfigurationSource;
-using Environment = CodingCat.Extensions.Configuration.Enums.Environment;
-using CodingCat.Extensions.Configuration.Enums;
-using System.Text;
 
 namespace CodingCat.Extensions.Configuration.ExtensionsConfigurations
 {
@@ -46,8 +46,10 @@ namespace CodingCat.Extensions.Configuration.ExtensionsConfigurations
             {
                 case FileType.Json:
                     return builder.AddJsonFile(path, isOptional, true);
+
                 case FileType.Xml:
                     return builder.AddXmlFile(path, isOptional, true);
+
                 case FileType.Ini:
                     return builder.AddIniFile(path, isOptional, true);
             }

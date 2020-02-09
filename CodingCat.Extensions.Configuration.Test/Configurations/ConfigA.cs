@@ -12,7 +12,10 @@ namespace CodingCat.Extensions.Configuration.Test.Configurations
         public bool Config3 { get; set; }
 
         #region Constructor(s)
-        public ConfigA() { }
+
+        public ConfigA()
+        {
+        }
 
         public ConfigA(string config1, int config2, bool config3)
         {
@@ -20,7 +23,8 @@ namespace CodingCat.Extensions.Configuration.Test.Configurations
             this.Config2 = config2;
             this.Config3 = config3;
         }
-        #endregion
+
+        #endregion Constructor(s)
 
         public void AssertWith(ConfigA actual)
         {
