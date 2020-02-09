@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using CodingCat.Extensions.Configuration.Enums;
+﻿using CodingCat.Extensions.Configuration.Enums;
 using CodingCat.Extensions.Configuration.ExtensionsConfigurations;
 using CodingCat.Extensions.Configuration.Test.Configurations;
 using Microsoft.Extensions.Configuration;
@@ -8,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
+using System;
+using System.IO;
 using IConfigurationBuilder = Microsoft.Extensions.Configuration.IConfigurationBuilder;
 
 namespace CodingCat.Extensions.Configuration.Test
