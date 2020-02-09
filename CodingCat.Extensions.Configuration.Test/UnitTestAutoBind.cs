@@ -101,8 +101,7 @@ namespace CodingCat.Extensions.Configuration.Test
 
             // Act
             var old = provider.GetService<IOptions<ConfigA>>().Value;
-
-            ModifyHotReloadFile(expected);
+            var file = ModifyHotReloadFile(expected);
             var actual = provider
                 .GetRequiredService<IOptionsSnapshot<ConfigA>>()
                 .Value;
@@ -113,6 +112,8 @@ namespace CodingCat.Extensions.Configuration.Test
             ));
 
             expected.AssertWith(actual);
+
+            file.Delete();
         }
 
         public static FileInfo GetHotReloadFile()
