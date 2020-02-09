@@ -111,6 +111,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="App_Data\Configurations\ConfigA.Develop.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="App_Data\Configurations\ConfigA.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

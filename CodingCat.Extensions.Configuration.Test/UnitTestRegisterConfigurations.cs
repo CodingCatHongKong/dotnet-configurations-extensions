@@ -25,12 +25,6 @@ namespace CodingCat.Extensions.Configuration.Test
         public void Test_BuildRegistered_ConfigAJson_Ok()
         {
             // Arrange
-            string buildConfigKey(string key) => $"configA:{key}";
-
-            var config1Key = buildConfigKey(nameof(ConfigA.Config1));
-            var config2Key = buildConfigKey(nameof(ConfigA.Config2));
-            var config3Key = buildConfigKey(nameof(ConfigA.Config3));
-
             var expectedConfig1 = "Config1";
             var expectedConfig2 = 2;
             var expectedConfig3 = true;
@@ -38,11 +32,35 @@ namespace CodingCat.Extensions.Configuration.Test
             // Act
             var actual = new ConfigA();
             this.Builder
-                .RegisterJson(
-                    typeof(ConfigA),
-                    Environment.Default,
-                    false
-                )
+                .RegisterJson(typeof(ConfigA), Environment.Default, false)
+                .Build()
+                .GetSection(nameof(ConfigA))
+                .Bind(actual);
+
+            // Assert
+            Console.WriteLine(JsonConvert.SerializeObject(
+                actual, Formatting.Indented
+            ));
+
+            Assert.IsNotNull(actual);
+            Assert.AreEqual(expectedConfig1, actual.Config1);
+            Assert.AreEqual(expectedConfig2, actual.Config2);
+            Assert.AreEqual(expectedConfig3, actual.Config3);
+        }
+
+        [TestMethod]
+        public void Test_BuildRegisteredDevelop_ConfigAJson_Ok()
+        {
+            // Arrange
+            var expectedConfig1 = "Config1";
+            var expectedConfig2 = 3;
+            var expectedConfig3 = true;
+
+            // Act
+            var actual = new ConfigA();
+            this.Builder
+                .RegisterJson(typeof(ConfigA), Environment.Default, false)
+                .RegisterJson(typeof(ConfigA), Environment.Develop, false)
                 .Build()
                 .GetSection(nameof(ConfigA))
                 .Bind(actual);
