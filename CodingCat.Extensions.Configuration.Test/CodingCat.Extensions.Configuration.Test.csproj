@@ -107,6 +107,7 @@
   <ItemGroup>
     <Compile Include="Configurations\ConfigA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTestAutoBind.cs" />
     <Compile Include="UnitTestRegisterConfigurations.cs" />
   </ItemGroup>
   <ItemGroup>
