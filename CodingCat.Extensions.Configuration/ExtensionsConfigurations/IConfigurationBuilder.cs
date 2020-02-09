@@ -68,19 +68,27 @@ namespace CodingCat.Extensions.Configuration.ExtensionsConfigurations
             );
         }
 
-        //public static IBuilder Register(
-        //    this IBuilder builder,
-        //    IConfigurationSource source
-        //)
-        //{
-        //    var isDefault = source.Environment == Environment.Default;
-        //    var path = source.DirectoryInfo?.FullName;
-        //    var fileName = new StringBuilder()
-        //        .Append(source.ConfigurationType.Name)
-        //        .Append(isDefault ? "" : $".{source.Environment.ToString()}")
-        //        .Append(".json")
-        //        .ToString();
-        //    return builder.AddJsonFile(fileName, source.IsOptional);
-        //}
+        public static IBuilder Register(
+            this IBuilder builder,
+            IConfigurationSource source
+        )
+        {
+            return builder.Register(
+                source.ConfigurationType,
+                source.ConfigurationsDirectory?.FullName,
+                source.Environment,
+                source.FileType,
+                source.IsOptional
+            );
+        }
+
+        public static IBuilder Register(
+            this IBuilder builder,
+            params IConfigurationSource[] sources
+        )
+        {
+            foreach (var source in sources) builder.Register(source);
+            return builder;
+        }
     }
 }
